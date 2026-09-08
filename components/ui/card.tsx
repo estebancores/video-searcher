@@ -57,7 +57,9 @@ export interface CourseCardProps {
   level: string;
   duration: string;
   modules: number;
-  icon?: string;
+  icon?: React.ReactNode;
+  iconClassName?: string;
+  variant?: "horizontal" | "vertical";
 }
 
 export function CourseCard({
@@ -67,30 +69,60 @@ export function CourseCard({
   duration,
   modules,
   icon,
+  iconClassName,
+  variant = "horizontal",
 }: CourseCardProps) {
-  return (
+  const iconNode = icon ?? title.charAt(0).toUpperCase();
+  const meta = (
+    <>
+      <span className="inline-flex items-center gap-1">
+        <BarChartIcon size={14} />
+        {level}
+      </span>
+      <span className="inline-flex items-center gap-1">
+        <ClockIcon size={14} />
+        {duration}
+      </span>
+      <span className="inline-flex items-center gap-1">
+        <FolderIcon size={14} />
+        {modules} modules
+      </span>
+    </>
+  );
+
+  return variant === "vertical" ? (
+    <Card className="flex flex-col gap-4">
+      <div
+        className={cn(
+          "flex h-16 w-16 shrink-0 items-center justify-center rounded-md text-2xl font-display",
+          iconClassName || "bg-neutral-900 text-white"
+        )}
+      >
+        {iconNode}
+      </div>
+      <div className="flex flex-1 flex-col gap-1">
+        <h3 className="text-heading-3 font-semibold text-neutral-900">{title}</h3>
+        <p className="text-body text-neutral-500">{description}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-3 pt-3 text-small text-neutral-500">
+          {meta}
+        </div>
+      </div>
+    </Card>
+  ) : (
     <Card className="flex gap-4">
       <div
-        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-neutral-900 text-2xl font-display text-white"
+        className={cn(
+          "flex h-16 w-16 shrink-0 items-center justify-center rounded-md text-2xl font-display",
+          iconClassName || "bg-neutral-900 text-white"
+        )}
       >
-        {icon ?? title.charAt(0).toUpperCase()}
+        {iconNode}
       </div>
       <div className="flex flex-col gap-1">
         <h3 className="text-heading-3 font-semibold text-neutral-900">{title}</h3>
         <p className="text-body text-neutral-500">{description}</p>
         <div className="mt-2 flex flex-wrap items-center gap-3 text-small text-neutral-500">
-          <span className="inline-flex items-center gap-1">
-            <BarChartIcon size={14} />
-            {level}
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <ClockIcon size={14} />
-            {duration}
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <FolderIcon size={14} />
-            {modules} modules
-          </span>
+          {meta}
         </div>
       </div>
     </Card>
