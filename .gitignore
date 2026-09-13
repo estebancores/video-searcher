@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/studio/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -19,6 +20,9 @@
 
 # production
 /build
+/studio/dist
+/studio/schema.json
+/studio/.sanity/
 
 # misc
 .DS_Store
