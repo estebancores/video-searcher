@@ -1,4 +1,5 @@
-import { ArrowRightIcon, BellIcon, SparkleIcon, UserIcon } from "@/components/icons";
+import { AuthControls } from "@/components/auth-controls";
+import { ArrowRightIcon, BellIcon, SparkleIcon } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/ui/card";
@@ -150,9 +151,7 @@ export default function HomePage() {
             >
               <BellIcon size={20} />
             </button>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
-              <UserIcon size={16} />
-            </div>
+            <AuthControls />
           </div>
         </div>
       </header>
